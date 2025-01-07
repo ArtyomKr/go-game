@@ -2,7 +2,9 @@ package camera
 
 import rl "github.com/gen2brain/raylib-go/raylib"
 
-func UpdateCamera(camera *rl.Camera3D, controls *CameraControls) {
+func (c *GameCamera) Update() {
+	controls := c.CameraControls
+	camera := c.Camera
 	mousePos := rl.GetMousePosition()
 	screenWidth := float32(rl.GetScreenWidth())
 	screenHeight := float32(rl.GetScreenHeight())
