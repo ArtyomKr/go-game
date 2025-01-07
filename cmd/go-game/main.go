@@ -4,6 +4,7 @@ import (
 	"fmt"
 	rl "github.com/gen2brain/raylib-go/raylib"
 	cm "go-game/internal/camera"
+	"go-game/internal/controls"
 )
 
 func main() {
@@ -16,6 +17,8 @@ func main() {
 	camera := cm.InitCamera()
 	cameraControls := cm.NewCameraControls()
 
+	gameControls := controls.New()
+
 	cubePosition := rl.NewVector3(0, 0, 0)
 
 	rl.SetTargetFPS(60)
@@ -23,6 +26,7 @@ func main() {
 	for !rl.WindowShouldClose() {
 		// Update camera based on controls
 		cm.UpdateCamera(&camera, &cameraControls)
+		controls.Update(&gameControls)
 
 		rl.BeginDrawing()
 
