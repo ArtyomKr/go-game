@@ -11,7 +11,7 @@ import (
 type Game struct {
 	World  *world.World
 	UI     *ui.UI
-	Camera *camera.GameCamera
+	Camera *camera.Camera
 	State  *state.State
 }
 
@@ -20,7 +20,7 @@ func New() *Game {
 		World:  world.New(),
 		UI:     ui.New(),
 		Camera: camera.New(),
-		State:  state.NewState(),
+		State:  state.New(),
 	}
 }
 
@@ -43,33 +43,4 @@ func (g *Game) Draw() {
 	g.UI.Draw(g.State)
 
 	rl.EndDrawing()
-}
-
-func (g *Game) handleInput() {
-	g.State.MousePos = rl.GetMousePosition()
-
-	// Handle global inputs like state changes
-	if rl.IsKeyPressed(rl.KeyB) {
-		if g.State.Mode == state.Normal {
-			g.State.Mode = state.Building
-		} else {
-			g.State.Mode = state.Normal
-		}
-	}
-
-	// Handle state-specific inputs
-	switch g.State.Mode {
-	case state.Normal:
-		g.handleNormalInput()
-	case state.Building:
-		g.handleBuildingInput()
-	}
-}
-
-func (g *Game) handleNormalInput() {
-	// Handle normal gameplay inputs
-}
-
-func (g *Game) handleBuildingInput() {
-	// Handle building mode inputs
 }
