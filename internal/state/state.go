@@ -14,7 +14,7 @@ type State struct {
 	MousePos rl.Vector2
 }
 
-func NewState() *State {
+func New() *State {
 	return &State{
 		Mode:     Normal,
 		MousePos: rl.Vector2{},
