@@ -2,7 +2,7 @@ package camera
 
 import rl "github.com/gen2brain/raylib-go/raylib"
 
-func (c *GameCamera) Update() {
+func (c *Camera) Update() {
 	controls := c.CameraControls
 	camera := c.Camera
 	mousePos := rl.GetMousePosition()

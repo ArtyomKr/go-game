@@ -5,7 +5,7 @@ import (
 	"go-game/internal/controls"
 )
 
-type GameCamera struct {
+type Camera struct {
 	Camera         *rl.Camera3D
 	CameraControls *controls.CameraControls
 }
@@ -21,8 +21,8 @@ func InitCamera() *rl.Camera3D {
 	return &camera
 }
 
-func New() *GameCamera {
-	return &GameCamera{
+func New() *Camera {
+	return &Camera{
 		Camera:         InitCamera(),
 		CameraControls: controls.NewCameraControls(),
 	}
