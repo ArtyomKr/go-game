@@ -12,7 +12,7 @@ type Camera struct {
 
 func InitCamera() *rl.Camera3D {
 	camera := rl.Camera3D{}
-	camera.Position = rl.NewVector3(0.0, 20.0, -20.0)
+	camera.Position = rl.NewVector3(0.0, 50.0, -50.0)
 	camera.Target = rl.NewVector3(0.0, 0.0, 0.0)
 	camera.Up = rl.NewVector3(0.0, 1.0, 0.0)
 	camera.Fovy = 45.0

@@ -23,7 +23,7 @@ func NewCameraControls() *CameraControls {
 		EdgeScrollMargin: 20,
 		MinHeight:        5.0,
 		MaxHeight:        50.0,
-		MinZoom:          5.0,
-		MaxZoom:          50.0,
+		MinZoom:          20.0,
+		MaxZoom:          100.0,
 	}
 }
