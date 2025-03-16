@@ -11,10 +11,19 @@ const (
 )
 
 type Building struct {
-	Type     BuildingType
-	Position rl.Vector3
-	Size     rl.Vector3
-	Color    rl.Color
+	BaseEntity
+	Type  BuildingType
+	Size  rl.Vector3
+	Color rl.Color
+}
+
+func NewBuilding(buildingType BuildingType, position rl.Vector2, size rl.Vector3, color rl.Color) *Building {
+	return &Building{
+		BaseEntity: NewBaseEntity(rl.NewVector3(position.X, 10, position.Y)),
+		Type:       buildingType,
+		Size:       size,
+		Color:      color,
+	}
 }
 
 func (b *Building) Draw() {

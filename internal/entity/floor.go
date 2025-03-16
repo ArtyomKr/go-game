@@ -3,7 +3,7 @@ package entity
 import rl "github.com/gen2brain/raylib-go/raylib"
 
 type Floor struct {
-	Position  rl.Vector3
+	BaseEntity
 	Size      rl.Vector2
 	Material  rl.Material
 	Mesh      rl.Mesh
@@ -16,11 +16,11 @@ func NewFloor(position rl.Vector3, size rl.Vector2) *Floor {
 	material := rl.LoadMaterialDefault()
 
 	return &Floor{
-		Position:  position,
-		Size:      size,
-		Material:  material,
-		Mesh:      mesh,
-		Transform: transform,
+		BaseEntity: NewBaseEntity(position),
+		Size:       size,
+		Material:   material,
+		Mesh:       mesh,
+		Transform:  transform,
 	}
 }
 
