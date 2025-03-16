@@ -16,11 +16,13 @@ type Game struct {
 }
 
 func New() *Game {
+	gameState := state.New()
+
 	return &Game{
-		World:  world.New(),
+		World:  world.New(gameState),
 		UI:     ui.New(),
 		Camera: camera.New(),
-		State:  state.New(),
+		State:  gameState,
 	}
 }
 

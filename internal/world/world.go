@@ -3,23 +3,17 @@ package world
 import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 	"go-game/internal/entity"
+	"go-game/internal/state"
 )
 
 type World struct {
-	Entities []entity.Drawable
-	Floor    *entity.Floor
-	//Grid      Grid
+	State *state.State
 }
 
-func New() *World {
+func New(state *state.State) *World {
 	return &World{
-		Entities: make([]entity.Drawable, 0),
-		Floor:    entity.NewFloor(rl.NewVector3(0, 0, 0), rl.NewVector2(100, 100)),
+		State: state,
 	}
-}
-
-func (w *World) AddEntity(e entity.Drawable) {
-	w.Entities = append(w.Entities, e)
 }
 
 // GetEntityAtRay checks for collisions between a ray and collidable entities in the world.
@@ -30,7 +24,7 @@ func (w *World) GetEntityAtRay(ray rl.Ray) (entity.Drawable, rl.RayCollision) {
 	closestCollision.Distance = -1 // Initialize with an invalid distance
 
 	// Check for collisions with all entities
-	for _, e := range w.Entities {
+	for _, e := range w.State.GetAllWorldEntities() {
 		if collidable, ok := e.(entity.Collidable); ok {
 			collision, hit := collidable.CheckCollision(ray)
 			if hit && (closestCollision.Distance < 0 || collision.Distance < closestCollision.Distance) {
@@ -47,7 +41,7 @@ func (w *World) GetEntityAtRay(ray rl.Ray) (entity.Drawable, rl.RayCollision) {
 
 func (w *World) Update() {
 	// Update all updatable entities
-	for _, e := range w.Entities {
+	for _, e := range w.State.GetAllWorldEntities() {
 		if updatable, ok := e.(entity.Updatable); ok {
 			updatable.Update()
 		}
@@ -55,10 +49,10 @@ func (w *World) Update() {
 }
 
 func (w *World) Draw() {
-	w.Floor.Draw()
-
-	for _, e := range w.Entities {
-		e.Draw()
+	for _, e := range w.State.GetAllWorldEntities() {
+		if drawable, ok := e.(entity.Drawable); ok {
+			drawable.Draw()
+		}
 	}
 
 	rl.DrawGrid(1000, 100.0)
@@ -66,7 +60,7 @@ func (w *World) Draw() {
 
 func (w *World) Unload() {
 	// Unload all unloadable entities
-	for _, e := range w.Entities {
+	for _, e := range w.State.GetAllWorldEntities() {
 		if unloadable, ok := e.(entity.Unloadable); ok {
 			unloadable.Unload()
 		}

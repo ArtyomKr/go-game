@@ -35,17 +35,16 @@ func (g *Game) handleNormalInput() {
 func (g *Game) handleBuildingInput() {
 	ray := rl.GetScreenToWorldRay(g.State.MousePos, *g.Camera.Camera)
 
-	floorCol, _ := g.World.Floor.CheckCollision(ray)
+	if rl.IsMouseButtonPressed(rl.MouseLeftButton) {
+		entityCol, collusion := g.World.GetEntityAtRay(ray)
 
-	entityCol, _ := g.World.GetEntityAtRay(ray)
-
-	fmt.Println(entityCol)
-
-	// Handle building mode inputs
-	if floorCol.Hit {
-		if rl.IsMouseButtonPressed(rl.MouseLeftButton) {
-			g.World.AddEntity(&entity.Building{Position: rl.NewVector3(floorCol.Point.X, 10, floorCol.Point.Z), Size: rl.NewVector3(10, 10, 10), Color: rl.Red})
+		switch v := entityCol.(type) {
+		case *entity.Building:
+			fmt.Println(entityCol, v)
+		case *entity.Floor:
+			fmt.Println(collusion, v)
+			building := entity.NewBuilding(entity.BuildingType(1), rl.NewVector2(collusion.Point.X, collusion.Point.Z), rl.NewVector3(10, 10, 10), rl.Red)
+			g.State.AddBuilding(building)
 		}
 	}
-
 }
