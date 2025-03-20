@@ -55,6 +55,11 @@ func (w *World) Draw() {
 		}
 	}
 
+	if w.State.Mode == state.Building {
+		w.DrawGrid(10)
+	}
+
+	w.drawAxisHelpers(100)
 	rl.DrawGrid(1000, 100.0)
 }
 
