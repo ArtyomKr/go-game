@@ -36,6 +36,7 @@ func New() *State {
 
 // GetAllWorldEntities returns a slice of all world entities in the state.
 func (s *State) GetAllWorldEntities() []entity.Entity {
+	// TODO: rewrite this to avoid creating new array every time. Use listener pattern to listen to State.World changes in world package?
 	entities := make([]entity.Entity, 0)
 
 	// Add the floor
@@ -49,21 +50,4 @@ func (s *State) GetAllWorldEntities() []entity.Entity {
 	}
 
 	return entities
-}
-
-// AddBuilding adds a building to the state.
-func (s *State) AddBuilding(building *entity.Building) {
-	s.Buildings[building.ID] = building
-}
-
-// RemoveBuilding removes a building from the state.
-func (s *State) RemoveBuilding(id entity.ID) {
-	delete(s.Buildings, id)
-}
-
-// UpdateBuilding updates a building's position or other properties.
-func (s *State) UpdateBuilding(id entity.ID, position rl.Vector3) {
-	if building, exists := s.Buildings[id]; exists {
-		building.Position = position
-	}
 }
