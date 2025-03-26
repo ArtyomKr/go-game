@@ -30,7 +30,8 @@ func New() *State {
 		MousePos: rl.Vector2{},
 		World: World{
 			Buildings: make(map[entity.ID]*entity.Building),
-			Floor:     entity.NewFloor(rl.NewVector3(0, 0, 0), rl.NewVector2(100, 100))},
+			Floor:     entity.NewFloor(rl.NewVector3(0, 0, 0), rl.NewVector2(100, 100)),
+		},
 	}
 }
 

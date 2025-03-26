@@ -5,6 +5,7 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 	"go-game/internal/entity"
 	"go-game/internal/state"
+	"go-game/internal/utils"
 )
 
 func (g *Game) handleInput() {
@@ -42,8 +43,11 @@ func (g *Game) handleBuildingInput() {
 		case *entity.Building:
 			fmt.Println(entityCol, v)
 		case *entity.Floor:
-			fmt.Println(collusion, v)
-			building := entity.NewBuilding(entity.BuildingType(1), rl.NewVector2(collusion.Point.X, collusion.Point.Z), rl.NewVector3(10, 10, 10), rl.Red)
+			// Snap the position to grid
+			snappedX := utils.SnapToGrid(collusion.Point.X, utils.GridSize)
+			snappedZ := utils.SnapToGrid(collusion.Point.Z, utils.GridSize)
+
+			building := entity.NewBuilding(entity.BuildingType(1), rl.NewVector2(snappedX, snappedZ), rl.NewVector3(10, 10, 10), rl.Red)
 			g.State.AddBuilding(building)
 		}
 	}

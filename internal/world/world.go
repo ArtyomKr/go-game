@@ -4,6 +4,7 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 	"go-game/internal/entity"
 	"go-game/internal/state"
+	"go-game/internal/utils"
 )
 
 type World struct {
@@ -56,7 +57,7 @@ func (w *World) Draw() {
 	}
 
 	if w.State.Mode == state.Building {
-		w.DrawGrid(10)
+		w.DrawGrid(utils.GridSize)
 	}
 
 	w.drawAxisHelpers(100)
