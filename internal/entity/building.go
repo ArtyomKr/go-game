@@ -19,7 +19,7 @@ type Building struct {
 
 func NewBuilding(buildingType BuildingType, position rl.Vector2, size rl.Vector3, color rl.Color) *Building {
 	return &Building{
-		BaseEntity: NewBaseEntity(rl.NewVector3(position.X, 10, position.Y)),
+		BaseEntity: NewBaseEntity(rl.NewVector3(position.X, 5, position.Y)),
 		Type:       buildingType,
 		Size:       size,
 		Color:      color,
